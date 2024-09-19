@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Debug Script",
+        "program": "${workspaceFolder}/dist/main.js",
+        "args": [
+          "--token",
+          "your_token",
+          "--folder",
+          "./upload_files",
+          "--url",
+          "http://your-system.com/api/legal-docs"
+        ],
+        "console": "integratedTerminal"
+      }
+    ]
+  }
+  
