@@ -12,15 +12,29 @@ export const getFileInfoFromName = (fileName: string) => {
   
     let type = '';
     if (nameWithoutExtension.includes('TC')) {
-      type = 'TERMS_AND_CONDITIONS';
+      type = 'terms_and_conditions';
     } else if (nameWithoutExtension.includes('PN')) {
-      type = 'PRIVACY_NOTICE';
+      type = 'privacy_notice';
     }
   
     let country = '';
+    let language = '';
     switch (location) {
+      case 'Argentina':
+        country = 'AR';
+        language = 'es';
+        break;
       case 'Brazil':
         country = 'BR';
+        language = 'pt-BR';
+        break;
+      case 'Bolivia':        
+        country = 'BO';
+        language = 'es';
+        break;
+      case 'Colombia':              
+        country = 'CO';
+        language = 'es';
         break;
       case 'USA':
         country = 'US';
@@ -30,19 +44,10 @@ export const getFileInfoFromName = (fileName: string) => {
         break;
       default:
         country = 'UNKNOWN';
+        language = 'en';
     }
   
-    let language = '';
-    if (location === 'Brazil') {
-      language = 'pt';
-    } else if (location === 'USA' || location === 'Canada') {
-      language = 'en';
-    }
-  
-    console.debug(language);
-    console.debug(location);
-    console.debug(country);
-
+    
     return { type, location: country, language };
   };
   

@@ -1,8 +1,5 @@
 import axios from 'axios';
-import path from 'path';
-import fs from 'fs';
 import { getFileInfoFromName } from '../file_upload/file_info';
-import { readFileToBase64 } from '../file_upload/file_reader';
 
 // Function to create a legal document record
 export const createLegalDoc = async (url: string, headers: any, fileName: string): Promise<string | undefined> => {
@@ -59,28 +56,6 @@ export const uploadLegalDocFile = async (url: string, headers: any, legalDocId: 
       console.error(`Error uploading file to document ${legalDocId}:`, error.message);
     } else {
       console.error(`Unknown error uploading file to document ${legalDocId}:`, error);
-    }
-  }
-};
-
-// Main function to process and upload PDF files
-export const uploadFile = async (url: string, folder: string, token: string): Promise<void> => {
-  const HEADERS = {
-    'Authorization': `Bearer ${token}`,
-    'Content-Type': 'application/json',
-  };
-
-  // List all PDF files in the specified folder
-  const files = fs.readdirSync(folder).filter(file => file.endsWith('.pdf'));
-
-  for (const file of files) {
-    const filePath = path.join(folder, file);
-    const base64File = readFileToBase64(filePath);
-
-    const legalDocId = await createLegalDoc(url, HEADERS, file);
-
-    if (legalDocId) {
-      await uploadLegalDocFile(url, HEADERS, legalDocId, base64File);
     }
   }
 };

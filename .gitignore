@@ -1,4 +1,5 @@
 # folder
-/upload_files
+/upload_files/*
 /node_modules
+/processed_files
 /dist

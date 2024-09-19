@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import { uploadFile } from './client/api_client';
+import { uploadFile } from './file_upload/file_upload';
 
 const program = new Command();
 
@@ -14,4 +14,4 @@ program.parse(process.argv);
 
 const options = program.opts();
 
-uploadFile(options.url, options.folder, options.token);
+uploadFile(options.url, options.token, options.folder);
