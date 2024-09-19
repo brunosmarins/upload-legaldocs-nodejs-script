@@ -32,8 +32,7 @@ export const createLegalDoc = async (url: string, headers: any, fileName: string
     return response.data.id;
   } catch (error) {
     if (error instanceof Error) {
-      console.error(`Error creating document for file ${fileName}:`, error.message);  
-      console.error(error);
+      console.error(`Error creating document for file ${fileName}:`, error.message);        
     } else {
       console.error(`Unknown error creating document for file ${fileName}:`, error);
     }
@@ -44,10 +43,7 @@ export const createLegalDoc = async (url: string, headers: any, fileName: string
 export const uploadLegalDocFile = async (url: string, headers: any, legalDocId: string, base64File: string): Promise<void> => {
   try {
     const uploadUrl = `${url}/${legalDocId}/document`;
-    console.log(`upload file url: ${uploadUrl}`);
-
-    console.log(`base 64 file: ${base64File}`);
-
+    
     await axios.post(
       uploadUrl,
       {

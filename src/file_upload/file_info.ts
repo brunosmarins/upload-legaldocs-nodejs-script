@@ -1,7 +1,11 @@
 // Function to extract type, location, and language from the file name
 export const getFileInfoFromName = (fileName: string) => {
-    const nameWithoutExtension = fileName.replace('.docx', '');
+    const nameWithoutExtension = fileName
+    .replace('FINAL-','')
+    .replace('.pdf', '');
+    
     console.debug(`name without extension: ${nameWithoutExtension}`);
+
     const [year, global, cw, pn, location] = nameWithoutExtension.split(' ');    
     console.log(year, global, cw, pn, location);
     console.debug(`location : ${location}`);
