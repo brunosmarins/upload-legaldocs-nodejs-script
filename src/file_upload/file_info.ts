@@ -6,48 +6,203 @@ export const getFileInfoFromName = (fileName: string) => {
     
     console.debug(`name without extension: ${nameWithoutExtension}`);
 
-    const [year, global, cw, pn, location] = nameWithoutExtension.split(' ');    
-    console.log(year, global, cw, pn, location);
-    console.debug(`location : ${location}`);
+    const [ , , , , country] = nameWithoutExtension.split(' ');    
+    console.debug(`country : ${country}`);
   
     let type = '';
     if (nameWithoutExtension.includes('TC')) {
-      type = 'terms_and_conditions';
+      type = 'TERMS_AND_CONDITIONS';
     } else if (nameWithoutExtension.includes('PN')) {
-      type = 'privacy_notice';
+      type = 'PRIVACY_NOTICE';
     }
   
-    let country = '';
+    const { location, language } = getLocationAndLanguage(country);
+     
+    return { type, location, language };
+  };
+
+
+
+  const getLocationAndLanguage = (country: string) => {
+    let location = '';
     let language = '';
-    switch (location) {
+  
+    switch (country) {
       case 'Argentina':
-        country = 'AR';
+        location = 'AR';
         language = 'es';
-        break;
+        break;  
       case 'Brazil':
-        country = 'BR';
+        location = 'BR';
         language = 'pt-BR';
         break;
-      case 'Bolivia':        
-        country = 'BO';
+      case 'Bolivia':
+      case 'Colombia':
+      case 'Chile':
+      case 'Panama':
+      case 'Paraguay':
+      case 'Peru':
+      case 'Uruguay':
+        location = country === 'Bolivia' ? 'BO' : 
+                   country === 'Colombia' ? 'CO' : 
+                   country === 'Chile' ? 'CL' :
+                   country === 'Panama' ? 'PA' :
+                   country === 'Paraguay' ? 'PY' :
+                   country === 'Peru' ? 'PE' : 
+                   'UY';
         language = 'es';
+        break;      
+      case 'Austria':
+      case 'Germany':
+        location = country === 'Austria' ? 'AT' : 'DE';
+        language = 'de';
+        break;      
+      case 'Belarus':
+      case 'Russia':
+        location = country === 'Belarus' ? 'BY' : 'RU';
+        language = 'ru';
+        break;      
+      case 'Belgium':
+        location = 'BE';
+        language = 'fr';
+        break;      
+      case 'Bulgaria':
+        location = 'BG';
+        language = 'bg';
+        break;      
+      case 'Croatia':
+        location = 'HR';
+        language = 'hr';
+        break;      
+      case 'Czechia':
+        location = 'CZ';
+        language = 'cs';
+        break;  
+      case 'Denmark':
+        location = 'DK';
+        language = 'da';
+        break;      
+      case 'Egypt':
+        location = 'EG';
+        language = 'ar';
+        break;  
+      case 'Estonia':
+        location = 'EE';
+        language = 'et';
         break;
-      case 'Colombia':              
-        country = 'CO';
-        language = 'es';
+  
+      case 'France':
+        location = 'FR';
+        language = 'fr';
         break;
-      case 'USA':
-        country = 'US';
+  
+      case 'Georgia':
+        location = 'GE';
+        language = 'ka';
         break;
-      case 'Canada':
-        country = 'CA';
+      case 'Greece':
+        location = 'GR';
+        language = 'el';
         break;
-      default:
-        country = 'UNKNOWN';
+      case 'Hungary':
+        location = 'HU';
+        language = 'hu';
+        break;
+      case 'Ireland':
+      case 'UK':
+      case 'South_Africa':
+      case 'New_Zealand':
+      case 'Zambia':
+      case 'Zimbabwe':
+        location = country === 'Ireland' ? 'IE' :
+                   country === 'UK' ? 'GB' :
+                   country === 'South_Africa' ? 'ZA' :
+                   country === 'New_Zealand' ? 'NZ' :
+                   country === 'Zambia' ? 'ZM' : 
+                   'ZW';
         language = 'en';
+        break;
+      case 'Italy':
+        location = 'IT';
+        language = 'it';
+        break;
+      case 'Kazakhstan':
+        location = 'KZ';
+        language = 'kk';
+        break;
+      case 'Latvia':
+        location = 'LV';
+        language = 'lv';
+        break;
+      case 'Lithuania':
+        location = 'LT';
+        language = 'lt';
+        break;
+      case 'Mexico':
+        location = 'MX';
+        language = 'es';
+        break;
+      case 'Moldova':
+        location = 'MD';
+        language = 'ro';
+        break;
+      case 'Mozambique':
+        location = 'MZ';
+        language = 'pt';
+        break;
+      case 'Netherlands':
+        location = 'NL';
+        language = 'nl';
+        break;
+      case 'Poland':
+        location = 'PL';
+        language = 'pl';
+        break;
+      case 'Portugal':
+        location = 'PT';
+        language = 'pt';
+        break;      
+      case 'Romania':
+        location = 'RO';
+        language = 'ro';
+        break;  
+      case 'Rwanda':
+        location = 'RW';
+        language = 'rw';
+        break;
+      case 'Slovakia':
+        location = 'SK';
+        language = 'sk';
+        break;
+      case 'Slovenia':
+        location = 'SI';
+        language = 'sl';
+        break;  
+      case 'Spain':
+        location = 'ES';
+        language = 'es';
+        break;
+      case 'Sweden':
+        location = 'SE';
+        language = 'sv';
+        break;
+      case 'Turkey':
+        location = 'TR';
+        language = 'tr';
+        break;
+      case 'Ukraine':
+        location = 'UA';
+        language = 'uk';
+        break;
+      case 'Uzbekistan':
+        location = 'UZ';
+        language = 'uz';
+        break;  
+      default:
+        location = 'UNKNOWN';
+        language = 'UNKNOWN';
     }
   
-    
-    return { type, location: country, language };
+    return { location, language };
   };
   

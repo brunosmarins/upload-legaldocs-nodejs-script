@@ -30,6 +30,7 @@ export const createLegalDoc = async (url: string, headers: any, fileName: string
   } catch (error) {
     if (error instanceof Error) {
       console.error(`Error creating document for file ${fileName}:`, error.message);        
+      console.error(error);
     } else {
       console.error(`Unknown error creating document for file ${fileName}:`, error);
     }
