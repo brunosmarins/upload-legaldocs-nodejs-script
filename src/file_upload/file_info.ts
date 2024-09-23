@@ -1,3 +1,6 @@
+import { types } from "util";
+import { legalDocstypes } from "../constants/types";
+
 // Function to extract type, location, and language from the file name
 export const getFileInfoFromName = (fileName: string) => {
     const nameWithoutExtension = fileName
@@ -11,9 +14,9 @@ export const getFileInfoFromName = (fileName: string) => {
   
     let type = '';
     if (nameWithoutExtension.includes('TC')) {
-      type = 'TERMS_AND_CONDITIONS';
+      type = legalDocstypes.terms_and_conditions;
     } else if (nameWithoutExtension.includes('PN')) {
-      type = 'PRIVACY_NOTICE';
+      type = legalDocstypes.privacy_notice;
     }
   
     const { location, language } = getLocationAndLanguage(country);
@@ -166,7 +169,7 @@ export const getFileInfoFromName = (fileName: string) => {
         location = 'RO';
         language = 'ro';
         break;  
-      case 'Rwanda':
+      case 'Rwanda': 
         location = 'RW';
         language = 'rw';
         break;
@@ -205,4 +208,3 @@ export const getFileInfoFromName = (fileName: string) => {
   
     return { location, language };
   };
-  
