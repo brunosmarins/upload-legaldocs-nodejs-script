@@ -73,6 +73,9 @@ export const getFileInfoFromName = (fileName: string) => {
         location = 'BG';
         language = 'bg';
         break;      
+      case 'Canada':
+        location = 'CA'
+        language = 'fr';
       case 'Croatia':
         location = 'HR';
         language = 'hr';
@@ -197,6 +200,9 @@ export const getFileInfoFromName = (fileName: string) => {
         location = 'UA';
         language = 'uk';
         break;
+      case 'USA' :
+        location = 'US';
+        language = 'en-US';
       case 'Uzbekistan':
         location = 'UZ';
         language = 'uz';
