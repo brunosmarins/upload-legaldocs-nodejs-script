@@ -1,5 +1,6 @@
 import { types } from "util";
 import { legalDocstypes } from "../constants/types";
+import { error } from "console";
 
 // Function to extract type, location, and language from the file name
 export const getFileInfoFromName = (fileName: string) => {
@@ -10,8 +11,7 @@ export const getFileInfoFromName = (fileName: string) => {
     console.debug(`name without extension: ${nameWithoutExtension}`);
 
     const [ , , , , country] = nameWithoutExtension.split(' ');    
-    console.debug(`country : ${country}`);
-  
+    
     let type = '';
     if (nameWithoutExtension.includes('TC')) {
       type = legalDocstypes.terms_and_conditions;
@@ -20,6 +20,7 @@ export const getFileInfoFromName = (fileName: string) => {
     }
   
     const { location, language } = getLocationAndLanguage(country);
+    console.debug(`country : ${country}, location: ${location}, language: ${language}`);      
      
     return { type, location, language };
   };
@@ -76,6 +77,7 @@ export const getFileInfoFromName = (fileName: string) => {
       case 'Canada':
         location = 'CA'
         language = 'fr';
+        break;
       case 'Croatia':
         location = 'HR';
         language = 'hr';
@@ -202,7 +204,8 @@ export const getFileInfoFromName = (fileName: string) => {
         break;
       case 'USA' :
         location = 'US';
-        language = 'en-US';
+        language = 'en';
+        break;
       case 'Uzbekistan':
         location = 'UZ';
         language = 'uz';
@@ -212,5 +215,14 @@ export const getFileInfoFromName = (fileName: string) => {
         language = 'UNKNOWN';
     }
   
-    return { location, language };
+    
+    console.log(`country: ${country}`);
+    console.log(`language: ${language}`);
+    console.log(`location: ${location}`);
+    
+    return { location, language };    
   };
+
+  function stopExecution() {
+    throw new Error('Stopping execution...');
+  }
