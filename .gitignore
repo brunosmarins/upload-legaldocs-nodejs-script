@@ -1,5 +1,7 @@
 # folder
-/upload_files/*
+upload_files/*
+!upload_files/.gitkeep
 /node_modules
-/processed_files
+/processed_files/*
+!processed_files/.gitkeep
 /dist
