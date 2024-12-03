@@ -222,7 +222,3 @@ export const getFileInfoFromName = (fileName: string) => {
     
     return { location, language };    
   };
-
-  function stopExecution() {
-    throw new Error('Stopping execution...');
-  }
